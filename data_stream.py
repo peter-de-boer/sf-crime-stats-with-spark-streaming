@@ -61,7 +61,7 @@ def run_spark_job(spark):
     # TODO select original_crime_type_name and disposition
     distinct_table = with_timestamp\
         .select("original_crime_type_name","disposition", "datetime") \
-        .withWatermark("datetime", "24 hours")
+        .withWatermark("datetime", "60 minutes")
 
 
     '''
