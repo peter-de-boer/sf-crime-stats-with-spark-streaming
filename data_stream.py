@@ -64,25 +64,6 @@ def run_spark_job(spark):
         .withWatermark("datetime", "60 minutes")
 
 
-    '''
-    # count the number of original crime type
-    agg_df = distinct_table.agg(psf.approx_count_distinct("original_crime_type_name"))
-
-
-    # TODO Q1. Submit a screen shot of a batch ingestion of the aggregation
-    # TODO write output stream
-    query = agg_df.writeStream \
-        .format("console") \
-        .queryName("myAwesomeQuery") \
-        .outputMode('Complete') \
-        .trigger(processingTime="10 seconds") \
-        .option("checkpointLocation", "/tmp/chkpnt") \
-        .start()
-
-    # TODO attach a ProgressReporter
-    query.awaitTermination()
-    '''
-
     
     # TODO get the right radio code json path
     radio_code_json_filepath = "/home/workspace/radio_code.json"
@@ -112,7 +93,7 @@ def run_spark_job(spark):
         .format("console") \
         .queryName("pdb") \
         .outputMode('Complete') \
-        .trigger(processingTime="10 seconds") \
+        .trigger(processingTime="30 seconds") \
         .option("truncate", "false") \
         .start()
         
